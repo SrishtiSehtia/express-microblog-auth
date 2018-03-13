@@ -2,7 +2,11 @@
 var express = require("express"),
   app = express(),
   bodyParser = require("body-parser"),
-  methodOverride = require("method-override");
+  methodOverride = require("method-override"),
+  cookieParser = require('cookie-parser'),
+  session = require('express-session'),
+  passport = require('passport'),
+  LocalStrategy = require('passport-local').Strategy;
 // require Post model
 var db = require("./models"),
   Post = db.Post;
@@ -17,6 +21,16 @@ app.use(express.static(__dirname + "/public"));
 app.set("view engine", "ejs");
 
 app.use(methodOverride("_method"));
+
+// middleware for auth
+app.use(cookieParser());
+app.use(session({
+  secret: 'supersecretkey', // change this!
+  resave: false,
+  saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // HOMEPAGE ROUTE
