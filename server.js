@@ -217,7 +217,7 @@ app.post('/signup', function (req, res) {
   User.register(new User({ username: req.body.username }), req.body.password,
     function (err, newUser) {
       passport.authenticate('local')(req, res, function() {
-        res.send('signed up!!!');
+        res.redirect('/');
       });
     }
   );
