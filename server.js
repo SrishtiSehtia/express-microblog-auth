@@ -231,8 +231,15 @@ app.get('/login', function (req, res) {
 // log in user
 app.post('/login', passport.authenticate('local'), function (req, res) {
   console.log(req.user);
-  res.send('logged in!!!'); // sanity check
-  // res.redirect('/'); // preferred!
+  res.redirect('/')
+});
+
+// log out user
+app.get('/logout', function (req, res) {
+  console.log("BEFORE logout", JSON.stringify(req.user));
+  req.logout();
+  console.log("AFTER logout", JSON.stringify(req.user));
+  res.redirect('/');
 });
 
 
