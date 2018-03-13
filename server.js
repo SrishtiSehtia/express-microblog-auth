@@ -223,6 +223,18 @@ app.post('/signup', function (req, res) {
   );
 });
 
+// show login view
+app.get('/login', function (req, res) {
+ res.render('login');
+});
+
+// log in user
+app.post('/login', passport.authenticate('local'), function (req, res) {
+  console.log(req.user);
+  res.send('logged in!!!'); // sanity check
+  // res.redirect('/'); // preferred!
+});
+
 
 // listen on port 3000
 app.listen(3000, function() {
