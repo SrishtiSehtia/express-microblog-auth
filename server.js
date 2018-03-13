@@ -9,7 +9,8 @@ var express = require("express"),
   LocalStrategy = require('passport-local').Strategy;
 // require Post model
 var db = require("./models"),
-  Post = db.Post;
+    Post = db.Post,
+    User = db.User;
 
 // configure bodyParser (for receiving form data)
 app.use(bodyParser.urlencoded({ extended: true, }));
