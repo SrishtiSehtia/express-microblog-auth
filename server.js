@@ -62,6 +62,9 @@ app.get("/posts/:id", function(req, res) {
 });
 
 app.post("/posts", function(req, res) {
+  if (!req.user) {
+   return res.sendStatus(401);
+  }
   var newPost = new Post(req.body);
 
   // save new post in db
@@ -77,6 +80,9 @@ app.post("/posts", function(req, res) {
 // update post
 app.put("/posts/:id", function (req, res) {
   // get post id from url params (`req.params`)
+  if (!req.user) {
+   return res.sendStatus(401);
+  }
   var postId = req.params.id;
 
   // find post in db by id
@@ -103,6 +109,9 @@ app.put("/posts/:id", function (req, res) {
 
 // delete post
 app.delete("/posts/:id", function (req, res) {
+  if (!req.user) {
+   return res.sendStatus(401);
+  }
   // get post id from url params (`req.params`)
   var postId = req.params.id;
 
